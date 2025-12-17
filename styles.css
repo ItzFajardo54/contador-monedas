@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #E6C08E, #D4AB6D);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* CONTENEDOR APP */
+.app {
+    width: 100%;
+    height: 550px;
+    background-color: #F6E2C1;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    overflow: hidden;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+/* PANTALLAS */
+.pantalla {
+    display: none;
+    height: 100%;
+    padding: 25px;
+}
+
+.pantalla.activa {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* TITULOS */
+h1, h2, h3 {
+    color: #6A3E1C;
+    text-align: center;
+    font-size: 50px;
+}
+
+/* INICIO */
+.contenido-inicio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 60px;
+}
+
+.personaje {
+    width: 320px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.burbuja {
+    width: 260px;
+    min-height: 70px;
+    background: white;
+    padding: 14px;
+    border-radius: 18px;
+    border: 2px solid #6A3E1C;
+    text-align: center;
+    font-size: 15px;
+    position: relative;
+}
+
+.burbuja::before {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 30px;
+    border-width: 12px 12px 0;
+    border-style: solid;
+    border-color: #6A3E1C transparent;
+}
+
+.burbuja::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent;
+}
+
+/* BOTONES */
+.botones button {
+    width: 240px;
+    padding: 15px;
+    font-size: 25px;
+    background: linear-gradient(90deg, #7A4A23, #5C3417);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: transform 0.2s;
+    margin-left: 80px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.botones button:hover {
+    transform: scale(1.05);
+}
+
+/* ANALISIS */
+.barra {
+    width: 100%;
+    height: 20px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7A4A23, #5C3417);
+}
+
+/* RESULTADOS */
+.contenido-resultados {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contenido-resultados img {
+    width: 230px;
+    height: 230px;
+    background: white;
+    border-radius: 15px;
+    border: 3px solid #7A4A23;
+    object-fit: cover;
+}
+
+.resultados {
+    width: 100%;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.resultados p {
+    margin: 5px 0;
+}
+
+.resultados strong {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* BOTON CERRAR */
+.cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    background: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#pantalla-analisis {
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.barra {
+    width: 60%;
+}
+
+@media (max-width: 900px) {
+    .app {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .contenido-inicio,
+    .contenido-resultados {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+#camara {
+    width: 260px;
+    height: 200px;
+    border-radius: 16px;
+    border: 3px solid #442503;
+    background: #000;
+    object-fit: cover;
+}
+
+.btn-foto {
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: none;
+    background-color: #442503;
+    color: white;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-foto:hover {
+    background-color: #5a3410;
+}
+
+.bloque-camara {
+    display: flex;
+    flex-direction: column; /* VIDEO arriba, botón abajo */
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+
+.imagen-resultado {
+    display: none;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.imagen-resultado.mostrar {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#porcentaje {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 10px;
+    color: #442503;
+}
+
+.resultados span {
+    font-weight: 600;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
