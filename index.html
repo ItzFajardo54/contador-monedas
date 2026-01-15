@@ -2,16 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contador de Monedas</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="app">
-
         <div id="pantalla-inicio" class="pantalla activa">
             <h1>Contador de monedas</h1>
             <div class="contenido-inicio">
@@ -22,7 +19,6 @@
                 <div class="botones">
                     <button onclick="abrirArchivo()">Subir foto</button>
                     <button onclick="tomarFoto()">Tomar foto</button>
-                    
                     <input type="file" id="archivo" accept="image/*" hidden onchange="procesarArchivo(event)">
                 </div>
             </div>
@@ -37,34 +33,44 @@
         </div>
 
         <div id="pantalla-resultados" class="pantalla">
-            <button class="cerrar" onclick="irAAñadirMas()">➕</button>
+            <button class="cerrar" onclick="irAAñadirMas(); reiniciarTodo()">❌</button>
 
             <div class="contenido-resultados">
-                <div class="bloque-camara" id="bloque-camara">
+                <div id="bloque-camara" style="display: none; width: 100%; flex-direction: column; align-items: center;">
                     <video id="camara" autoplay playsinline></video>
-                    <button class="btn-foto" onclick="capturarYAnalizar()">📸 Contar esta moneda</button>
+                    <button class="btn-foto" onclick="capturarYAnalizar()">📸 Capturar Moneda</button>
                 </div>
 
-                <img id="imagenResultado" class="imagen-resultado">
-
+                <div class="carrusel-container" id="carrusel-fotos" style="display: none;">
+                    <button class="flecha flecha-izq" onclick="navegarCarrusel(-1)">&#10094;</button>
+                    <div class="marco-foto">
+                        <img id="imagenResultado" class="imagen-resultado" alt="Foto analizada">
+                    </div>
+                    <button class="flecha flecha-der" onclick="navegarCarrusel(1)">&#10095;</button>
+                </div>
+                <p id="contador-fotos" style="text-align:center; color:#6A3E1C; display:none;">
+                    Foto <span id="idx-actual">0</span> de <span id="idx-total">0</span>
+                </p>
+                
                 <div class="resultados">
                     <h3>Tu Monedero MXN</h3>
-                    <p>$1 : <span id="m1">0</span></p>
-                    <p>$2 : <span id="m2">0</span></p>
-                    <p>$5 : <span id="m5">0</span></p>
-                    <p>$10 : <span id="m10">0</span></p>
-                    <p>$20 : <span id="m20">0</span></p>
+                    <div class="grid-monedas">
+                        <p>$1 : <span id="m1">0</span></p>
+                        <p>$2 : <span id="m2">0</span></p>
+                        <p>$5 : <span id="m5">0</span></p>
+                        <p>$10 : <span id="m10">0</span></p>
+                        <p>$20 : <span id="m20">0</span></p>
+                    </div>
                     <hr>
                     <strong>Total: $<span id="total">0</span></strong>
                     
-                    <div style="display:flex; gap:10px; margin-top:15px;">
-                        <button onclick="irAAñadirMas()" style="background:#442503; color:white; border-radius:10px; flex:1; padding:10px; border:none; cursor:pointer; font-family: 'Poppins';">Añadir más</button>
-                        <button onclick="reiniciarTodo()" style="background:#a32a2a; color:white; border-radius:10px; flex:1; padding:10px; border:none; cursor:pointer; font-family: 'Poppins';">Vaciar</button>
+                    <div class="botones-finales">
+                        <button onclick="irAAñadirMas()" class="btn-mas">Añadir más</button>
+                        <button onclick="reiniciarTodo()" class="btn-vaciar">Vaciar</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>

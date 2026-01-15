@@ -1,6 +1,4 @@
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -9,67 +7,61 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 0;
-    overflow: hidden;
+    min-height: 100vh; /* Cambiado de height a min-height */
+    padding: 10px;
 }
 
 /* CONTENEDOR APP */
 .app {
     width: 100%;
-    height: 550px;
+    max-width: 500px;
+    min-height: 550px; /* Altura mínima en lugar de fija */
     background-color: #F6E2C1;
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     overflow: hidden;
     position: relative;
-    max-width: 500px;
-    margin: 0 auto;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* PANTALLAS */
 .pantalla {
     display: none;
-    height: 100%;
-    padding: 25px;
+    padding: 20px;
+    flex-grow: 1;
 }
 
 .pantalla.activa {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 }
 
 /* TITULOS */
-h1, h2, h3 {
-    color: #6A3E1C;
-    text-align: center;
-    font-size: 50px;
-}
+h1 { color: #6A3E1C; text-align: center; font-size: clamp(24px, 8vw, 40px); margin: 10px 0; }
+h2, h3 { color: #6A3E1C; text-align: center; }
 
 /* INICIO */
 .contenido-inicio {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column; /* Cambiado a columna para mejor ajuste */
     align-items: center;
-    height: 100%;
-    padding: 0 60px;
+    gap: 20px;
+    width: 100%;
 }
 
 .personaje {
-    width: 320px;
-    height: 260px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
+.personaje img { width: 120px; height: auto; }
+
 .burbuja {
-    width: 260px;
-    min-height: 70px;
+    max-width: 260px;
     background: white;
     padding: 14px;
     border-radius: 18px;
@@ -77,77 +69,48 @@ h1, h2, h3 {
     text-align: center;
     font-size: 15px;
     position: relative;
-}
-
-.burbuja::before {
-    content: "";
-    position: absolute;
-    bottom: -14px;
-    left: 30px;
-    border-width: 12px 12px 0;
-    border-style: solid;
-    border-color: #6A3E1C transparent;
-}
-
-.burbuja::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 30px;
-    border-width: 10px 10px 0;
-    border-style: solid;
-    border-color: white transparent;
+    margin-bottom: 15px;
 }
 
 /* BOTONES */
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 280px;
+}
+
 .botones button {
-    width: 240px;
+    width: 100%;
     padding: 15px;
-    font-size: 25px;
+    font-size: 18px;
     background: linear-gradient(90deg, #7A4A23, #5C3417);
     color: white;
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    margin: 10px 0;
-    transition: transform 0.2s;
-    margin-left: 80px;
     font-family: 'Poppins', sans-serif;
-}
-
-.botones button:hover {
-    transform: scale(1.05);
-}
-
-/* ANALISIS */
-.barra {
-    width: 100%;
-    height: 20px;
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.progreso {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #7A4A23, #5C3417);
+    transition: 0.2s;
 }
 
 /* RESULTADOS */
 .contenido-resultados {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    width: 100%;
 }
 
-.contenido-resultados img {
-    width: 230px;
-    height: 230px;
-    background: white;
+#camara {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1 / 1;
     border-radius: 15px;
     border: 3px solid #7A4A23;
     object-fit: cover;
+    background: #000;
 }
 
 .resultados {
@@ -157,115 +120,126 @@ h1, h2, h3 {
     border-radius: 15px;
 }
 
-.resultados p {
-    margin: 5px 0;
+.botones-finales {
+    display: flex; 
+    gap: 10px; 
+    margin-top: 15px;
 }
 
-.resultados strong {
-    display: block;
-    text-align: center;
-    font-size: 18px;
-    margin-top: 10px;
+.btn-mas { background: #442503; color: white; border-radius: 10px; flex: 1; padding: 10px; border: none; font-family: 'Poppins'; cursor: pointer;}
+.btn-vaciar { background: #a32a2a; color: white; border-radius: 10px; flex: 1; padding: 10px; border: none; font-family: 'Poppins'; cursor: pointer;}
+
+/* AJUSTE PARA MODO HORIZONTAL (LANDSCAPE) */
+@media (orientation: landscape) and (max-height: 500px) {
+    .app { max-width: 80%; min-height: 90vh; }
+    .contenido-inicio { flex-direction: row; justify-content: center; }
+    .personaje img { width: 80px; }
+    h1 { font-size: 24px; }
 }
 
-/* BOTON CERRAR */
+/* BARRA ANALISIS */
+.barra { width: 80%; height: 20px; background: white; border-radius: 15px; overflow: hidden; }
+.progreso { height: 100%; width: 0%; background: linear-gradient(90deg, #7A4A23, #5C3417); }
+
 .cerrar {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    border: none;
-    background: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-#pantalla-analisis {
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-}
-
-.barra {
-    width: 60%;
-}
-
-@media (max-width: 900px) {
-    .app {
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
-    }
-
-    .contenido-inicio,
-    .contenido-resultados {
-        flex-direction: column;
-        padding: 20px;
-    }
-}
-
-#camara {
-    width: 260px;
-    height: 200px;
-    border-radius: 16px;
-    border: 3px solid #442503;
-    background: #000;
-    object-fit: cover;
+    position: absolute; top: 10px; right: 10px; border: none; background: white;
+    width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
 }
 
 .btn-foto {
-    padding: 10px 18px;
-    font-size: 16px;
-    border-radius: 20px;
-    border: none;
-    background-color: #442503;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px; /* Forma de píldora */
+    border: 4px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+    background: linear-gradient(135deg, #6A3E1C, #442503);
     color: white;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
-}
-
-.btn-foto:hover {
-    background-color: #5a3410;
-}
-
-.bloque-camara {
     display: flex;
-    flex-direction: column; /* VIDEO arriba, botón abajo */
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 6px 15px rgba(68, 37, 3, 0.4);
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
+/* Efecto al presionar (importante para móviles) */
+.btn-foto:active {
+    transform: scale(0.92);
+    box-shadow: 0 2px 8px rgba(68, 37, 3, 0.6);
+    background: #2e1802;
+}
+
+/* Animación sutil para llamar la atención */
+.btn-foto {
+    animation: pulso 2s infinite;
+}
+
+@keyframes pulso {
+    0% { box-shadow: 0 0 0 0 rgba(106, 62, 28, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(106, 62, 28, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(106, 62, 28, 0); }
+}
+
+
+.flash-efecto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes flash-anim {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
 
 .imagen-resultado {
     display: none;
-    max-width: 100%;
-    margin: 20px auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-
+    width: 100%;
+    max-width: 300px;
+    border: 8px solid white; /* Efecto Polaroid */
+    border-bottom: 25px solid white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transform: rotate(-2deg); /* Un poco inclinada para estilo */
+    transition: all 0.5s ease;
     opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    height: auto;
 }
 
 .imagen-resultado.mostrar {
+    display: block;
     opacity: 1;
-    transform: scale(1);
+    transform: rotate(0deg) scale(1);
 }
 
-#porcentaje {
-    font-size: 22px;
-    font-weight: 600;
-    margin-top: 10px;
+.flecha {
+    background: none;
+    border: none;
+    font-size: 35px;
+    color: #6A3E1C; /* El mismo color café de tus textos */
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s, color 0.2s;
+    user-select: none; /* Evita que se seleccione el texto de la flecha */
+}
+
+.flecha:hover {
+    transform: scale(1.2); /* Crecen un poco al pasar el mouse */
     color: #442503;
 }
 
-.resultados span {
-    font-weight: 600;
-    font-size: 18px;
-    transition: transform 0.2s;
+/* Clase para deshabilitar flechas cuando no hay más fotos */
+.flecha.desactivada {
+    color: #ccc;
+    cursor: default;
+    pointer-events: none; /* No se puede dar click */
 }

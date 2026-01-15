@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "Connta2",
+			"path": "."
+		},
+		{
+			"name": "modelo",
+			"path": "../modelo"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Connta2"
+	}
+}
